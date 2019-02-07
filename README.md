@@ -2,8 +2,6 @@
 
 Built with [Laravel 5.7](https://laravel.com/docs/5.7)
 
-[Demo Site](https://emkaysports.herokuapp.com/)
-
 ## Dependencies
 
 -   PHP (at least 7.1)
