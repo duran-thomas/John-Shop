@@ -20,7 +20,11 @@ class CreateStockTable extends Migration
             $table->string('item_name');
             $table->float('item_price');
             $table->integer('item_quantity');
+            $table->unsignedInteger('supplier_ID');
             $table->timestamps();
+
+            $table->foreign('supplier_ID')->references('id')->on('supplier');
+            
         });
     }
 

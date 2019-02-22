@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace JohnShop\Providers;
 
 use Schema;
 use Illuminate\Support\ServiceProvider;
