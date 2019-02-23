@@ -24,7 +24,7 @@
             "database/factories"
         ],
         "psr-4": {
-            "JohnShop\\": "app/"
+            "App\\": "app/"
         }
     },
     "autoload-dev": {

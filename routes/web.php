@@ -11,10 +11,21 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function(){
+    return redirect()->route("login");
+});
 
-Auth::routes();
+Auth::routes(['verify'=>true]);
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::group(['middleware' => ['verified', 'auth']], function () {
+
+    Route::get('/home', 'HomeController@index')->name('home');
+});
+
+Route::get('/home', function()
+{
+	$supplier = DB::table('supplier')->get();
+	return View::make('home')->with('supplier', $supplier);
+});
+
+Route::post('/home', 'SupplierController@store');

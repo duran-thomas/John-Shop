@@ -155,11 +155,11 @@ return [
         /*
          * Application Service Providers...
          */
-        JohnShop\Providers\AppServiceProvider::class,
-        JohnShop\Providers\AuthServiceProvider::class,
-        // JohnShop\Providers\BroadcastServiceProvider::class,
-        JohnShop\Providers\EventServiceProvider::class,
-        JohnShop\Providers\RouteServiceProvider::class,
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
 
     ],
 
