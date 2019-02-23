@@ -10,8 +10,6 @@
   <link rel="stylesheet" href="css/materialdesignicons.min.css">
   <link rel="stylesheet" href="css/vendor.bundle.base.css">
   <link rel="stylesheet" href="css/vendor.bundle.addons.css">
-  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <!-- endinject -->
   <!-- plugin css for this page -->
@@ -40,8 +38,8 @@
             <li class="nav-item dropdown d-none d-xl-inline-block">
                 <a class="nav-link" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                     <span class="profile-text">Hello, {{ Auth::user()->name }}</span>
-                    <i class="icon-user"></i>
-                    <i class="icon-double-angle-down"></i>
+                    {{-- <i class="icon-user"></i>
+                    <i class="icon-double-angle-down"></i> --}}
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                     <a class="dropdown-item" href="{{ route('logout') }}"
