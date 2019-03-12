@@ -25,7 +25,7 @@ Built with [Laravel 5.7](https://laravel.com/docs/5.7)
 Initialize and seed the database:
 
 ```php
-php artisan migrate --seed
+php artisan migrate:fresh
 ```
 
 Finally, start the project:
