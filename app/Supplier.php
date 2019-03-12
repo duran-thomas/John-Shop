@@ -8,5 +8,5 @@ class Supplier extends Model
 {
     public $table = 'supplier';
 
-    protected $fillable = ['name', 'address', 'contact'];
+    protected $fillable = ['name', 'address', 'contact', 'email'];
 }

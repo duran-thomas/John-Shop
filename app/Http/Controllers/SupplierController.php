@@ -12,9 +12,12 @@ class SupplierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     
     public function index()
     {
-        //
+        $supplier = Supplier::all();
+        return view('supplier', compact('supplier'));
     }
 
     /**
@@ -39,17 +42,19 @@ class SupplierController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'address' => 'required',
-            'contact' => 'required'
+            'contact' => 'required',
+            'email' => 'required'
         ]);
         
         $supplier = new Supplier([
             'name' => $request->get('name'),
             'address' => $request->get('address'),
             'contact' => $request->get('contact'),
+            'email' => $request->get('email'),
         ]);
         $supplier->save();
 
-        return redirect('/home');
+        return redirect('/supplier');
 
         // $attributes = request()->validate([
         //     'name' => ['requred', 'min:3'],
@@ -68,7 +73,10 @@ class SupplierController extends Controller
      */
     public function show(Supplier $supplier)
     {
-        return view('/home', compact('supplier'));
+
+        $supplier = DB::table('supplier')->get();
+        return View::make('/supplier')->with('supplier', $supplier);
+        //return view('/supplier', compact('supplier'));
         
     }
 
@@ -90,9 +98,13 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $supplier = Supplier::findOrFail($request->supplier_id);
+
+        $supplier->update($request->all());
+        //Supplier::update($request->all());
+        return back();
     }
 
     /**
@@ -101,8 +113,11 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $supplier = Supplier::findOrFail($request->supplier_id);
+
+        $supplier->delete($request->all());
+        return back();
     }
 }

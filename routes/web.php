@@ -22,10 +22,20 @@ Route::group(['middleware' => ['verified', 'auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
 });
 
-Route::get('/home', function()
-{
-	$supplier = DB::table('supplier')->get();
-	return View::make('home')->with('supplier', $supplier);
-});
+// Route::get('/', function()
+// {
+// 	$supplier = DB::table('supplier')->get();
+// 	return View::make('/home')->with('supplier', $supplier);
+// });
 
-Route::post('/home', 'SupplierController@store');
+// Route::post('/supplier', 'SupplierController@store');
+
+//Routes To All CRUD Methods For Supplier 
+Route::resource('supplier', 'SupplierController');
+
+//Routes To All CRUD Methods For Stocks 
+Route::resource('supplier', 'SupplierController');
+
+//Routes To All CRUD Methods For Orders 
+Route::resource('supplier', 'SupplierController');
+
