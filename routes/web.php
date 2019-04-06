@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function(){
+Route::get('/admin', function(){
     return redirect()->route("login");
 });
 
@@ -19,23 +19,18 @@ Auth::routes(['verify'=>true]);
 
 Route::group(['middleware' => ['verified', 'auth']], function () {
 
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/admin/home', 'HomeController@index')->name('/admin/home');
+
 });
 
-// Route::get('/', function()
-// {
-// 	$supplier = DB::table('supplier')->get();
-// 	return View::make('/home')->with('supplier', $supplier);
-// });
-
-// Route::post('/supplier', 'SupplierController@store');
-
 //Routes To All CRUD Methods For Supplier 
-Route::resource('supplier', 'SupplierController');
+Route::resource('admin/supplier', 'SupplierController')->middleware('auth');
+//Routes To All CRUD Methods For Stock
+Route::resource('admin/stock', 'StockController')->middleware('auth');
+//Routes To All CRUD Methods For Order
+Route::resource('admin/orders', 'OrdersController')->middleware('auth');
 
-//Routes To All CRUD Methods For Stocks 
-Route::resource('supplier', 'SupplierController');
+Route::resource('/ ', 'FrontController');
 
-//Routes To All CRUD Methods For Orders 
-Route::resource('supplier', 'SupplierController');
+
 

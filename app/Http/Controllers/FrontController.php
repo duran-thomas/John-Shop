@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
-class StocksController extends Controller
+class FrontController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,8 @@ class StocksController extends Controller
      */
     public function index()
     {
-        //
+        $stock = DB::table('stock')->get();
+        return view('index', compact('stock'));
     }
 
     /**
@@ -34,7 +36,17 @@ class StocksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $orders = new Orders();
+        $orders->item_ID = $request->name;
+        $orders->item_name = $request->id_num;
+        $orders->item_price = $request->location;
+        //$orders->item_quantity = $request->item_quantity;
+       // $orders->supplier_ID = $request->supplier_ID;
+
+        $orders->save();
+
+        return redirect('index');
+    
     }
 
     /**

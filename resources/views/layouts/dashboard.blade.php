@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>@yield('title', 'Admin Dashboard')</title>
   <!-- plugins:css -->
-  <link rel="stylesheet" href="css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="css/vendor.bundle.base.css">
-  <link rel="stylesheet" href="css/vendor.bundle.addons.css">
+  <link rel="stylesheet" href="/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="/css/vendor.bundle.addons.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="//cdn.materialdesignicons.com/3.5.95/css/materialdesignicons.min.css">
 
@@ -17,7 +17,7 @@
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
 </head>
@@ -60,7 +60,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{url('home')}}">
               <i class="menu-icon mdi mdi-television"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -74,17 +74,17 @@
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                <a class="nav-link" href="{{url('supplier')}}">Supplier</a>
+                  <a class="nav-link" href="{{url('admin/supplier')}}">Supplier</a>
                 </li>
                 <li class="nav-item">
+                  <a class="nav-link" href="{{url('admin/stock')}}">Stock</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{url('admin/orders')}}">Orders</a>
+                </li>
+                {{-- <li class="nav-item">
                   <a class="nav-link" href="../../pages/ui-features/typography.html">User</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../../pages/ui-features/typography.html">Jobs</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../../pages/ui-features/typography.html">Stock</a>
-                </li>
+                </li> --}}
               </ul>
             </div>
           </li>
@@ -123,6 +123,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script>
+  //Edit Supplier Modal
   $('#editSupplier').on('show.bs.modal', function(event){
 
     var button = $(event.relatedTarget)
@@ -140,12 +141,82 @@
     modal.find('.modal-body #supplier_id').val(supplier_id);
   })
 
+  //Edit Stock Modal (Fix This Function)
+  $('#editStock').on('show.bs.modal', function(event){
+
+  var button = $(event.relatedTarget)
+  var item_ID = button.data('item_id')
+  var item_name = button.data('item_name')
+  var item_price = button.data('item_price')
+  var item_quantity = button.data('item_quantity')
+  var supplier_id = button.data('supplier_id')
+  var stock_id = button.data('id')
+
+  var modal = $(this)
+  modal.find('.modal-body #item_ID').val(item_ID);
+  modal.find('.modal-body #item_name').val(item_name);
+  modal.find('.modal-body #item_price').val(item_price);
+  modal.find('.modal-body #item_quantity').val(item_quantity);
+  modal.find('.modal-body #supplier_id').val(supplier_id);
+  modal.find('.modal-body #stock_id').val(stock_id);
+  })
+
+  //Edit Oder Modal
+  $('#editOrder').on('show.bs.modal', function(event){
+
+  var button = $(event.relatedTarget)
+  var name = button.data('name')
+  var customer_ID = button.data('customer_ID')
+  var location = button.data('location')
+  var outForDelivery = button.data('outForDelivery')
+  var delivered = button.data('delivered')
+  var order_id = button.data('order_id')
+
+  var modal = $(this)
+  modal.find('.modal-body #name').val(name);
+  modal.find('.modal-body #customer_IDcustomer_IDcustomer_IDcustomer_ID').val(customer_ID);
+  modal.find('.modal-body #location').val(location);
+  modal.find('.modal-body #outForDelivery').val(outForDelivery);
+  if(outForDelivery == 0){
+    modal.find('.modal-body #outForDelivery').prop('checked', false); 
+  }else{
+    modal.find('.modal-body #outForDelivery').prop('checked', true);
+  }
+  if(delivered == 0){ 
+    modal.find('.modal-body #delivered').prop('checked', false); 
+  }else{
+    modal.find('.modal-body #delivered').prop('checked', true);
+  }
+  //modal.find('.modal-body #outForDelivery').prop('checked', true);
+  //modal.find('.modal-body #delivered').val(delivered);
+  modal.find('.modal-body #order_id').val(order_id);
+  })
+
+  //Delete Supplier Modal
   $('#deleteSupplier').on('show.bs.modal', function(event){
     var button = $(event.relatedTarget)
     var supplier_id = button.data('supplier_id')
 
     var modal = $(this)
     modal.find('.modal-body #supplier_id').val(supplier_id);
+  })
+
+  //Delete Stock Modal
+  $('#deleteStock').on('show.bs.modal', function(event){
+    var button = $(event.relatedTarget)
+    var stock_id = button.data('stock_id')
+
+    var modal = $(this)
+    modal.find('.modal-body #stock_id').val(stock_id);
+  })
+
+  //Delete Order
+  $('#deleteOrder').on('show.bs.modal', function(event){
+    var button = $(event.relatedTarget)
+    var order_id = button.data('order_id')
+
+    var modal = $(this)
+    modal.find('.modal-body #order_id').val(order_id);
   })
 
 </script>

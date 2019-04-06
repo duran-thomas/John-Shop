@@ -3,21 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Stock;
 use App\Supplier;
+use View;
+use DB;
 
-class SupplierController extends Controller
+class StockController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-     
     public function index()
     {
-        $supplier = Supplier::all();
-        return view('admin/supplier', compact('supplier'));
+        $stock = DB::table('stock')->get();
+        $supplier = DB::table('supplier')->get();
+        return view::make('admin/stock', compact('supplier', 'stock'));
     }
 
     /**
@@ -38,22 +40,17 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'address' => 'required',
-            'contact' => 'required',
-            'email' => 'required'
-        ]);
-        
-        $supplier = new Supplier([
-            'name' => $request->get('name'),
-            'address' => $request->get('address'),
-            'contact' => $request->get('contact'),
-            'email' => $request->get('email'),
-        ]);
-        $supplier->save();
+        $stock = new Stock();
+        $stock->item_ID = $request->item_ID;
+        $stock->item_name = $request->item_name;
+        $stock->item_price = $request->item_price;
+        $stock->item_quantity = $request->item_quantity;
+        $stock->supplier_ID = $request->supplier_ID;
 
-        return redirect('admin/supplier');
+        $stock->save();
+
+        return redirect('admin/stock');
+
     }
 
     /**
@@ -62,13 +59,12 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Supplier $supplier)
+    public function show(Stock $stock)
     {
-
-        $supplier = DB::table('supplier')->get();
-        return View::make('admin/supplier')->with('supplier', $supplier);
-        //return view('/supplier', compact('supplier'));
+        $stock = DB::table('stock')->get();
         
+        return view::make('admin/stock', compact($stock));
+        //return View::make('/stock')->with('stock', $stock);
     }
 
     /**
@@ -77,9 +73,12 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $stock = Stock::findOrFail($request->stock_id);
+
+        $stock->update($request->all());
+        return back();
     }
 
     /**
@@ -91,9 +90,8 @@ class SupplierController extends Controller
      */
     public function update(Request $request)
     {
-        $supplier = Supplier::findOrFail($request->supplier_id);
-
-        $supplier->update($request->all());
+        $stock = Stock::findOrFail($request->stock_id);
+        $stock->update($request->all());
         return back();
     }
 
@@ -105,9 +103,9 @@ class SupplierController extends Controller
      */
     public function destroy(Request $request)
     {
-        $supplier = Supplier::findOrFail($request->supplier_id);
+        $stock = Stock::findOrFail($request->stock_id);
 
-        $supplier->delete($request->all());
+        $stock->delete($request->all());
         return back();
     }
 }

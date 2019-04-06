@@ -17,6 +17,7 @@ class CreateItemsOrderedTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('order_id');
             $table->unsignedInteger('item_id');
+            $table->unsignedInteger('quantity');
             $table->timestamps();
 
             $table->foreign('order_id')->references('id')->on('orders');

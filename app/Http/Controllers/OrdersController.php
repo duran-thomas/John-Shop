@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use View;
+use App\Orders;
 
 class OrdersController extends Controller
 {
@@ -13,7 +16,8 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        //
+        $orders = DB::table('orders')->get();
+        return view::make('admin/orders', compact('orders'));
     }
 
     /**
@@ -68,7 +72,10 @@ class OrdersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $orders = Orders::findOrFail($request->order_id);
+
+        $orders->update($request->all());
+        return back();
     }
 
     /**
@@ -77,8 +84,11 @@ class OrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $orders = Orders::findOrFail($request->order_id);
+
+        $orders->delete($request->all());
+        return back();
     }
 }
