@@ -30,7 +30,11 @@ Route::resource('admin/stock', 'StockController')->middleware('auth');
 //Routes To All CRUD Methods For Order
 Route::resource('admin/orders', 'OrdersController')->middleware('auth');
 
-Route::resource('/ ', 'FrontController');
+Route::get('/', function(){
+    return redirect('index');
+});
+
+Route::resource('/index', 'FrontController');
 
 
 

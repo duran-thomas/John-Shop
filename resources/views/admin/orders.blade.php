@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <h3 class="card-title">Orders Table</h3>
                     <div class="table">
-                        <table class="table col-md">
+                        <table class="table col-md" id="laravel_datatable">
                             <thead class="thead-primary">
                                 <tr class="table-primary">
                                     <th scope="col" class="text-center">ID</th>
@@ -31,7 +31,7 @@
                                         <td class="text-center">{{$orders->customer_ID}}</td>
                                         <td class="text-center">{{$orders->location}}</td>
                                         <td class="text-center">
-                                            <button class="btn btn-secondary" >
+                                            <button class="btn btn-secondary" data-toggle="modal" data-target="#viewOrder">
                                                 <span><i class="mdi  mdi-note-multiple-outline"></i></span> View
                                             </button>
                                         </td>
@@ -158,6 +158,25 @@
                               </div>
                             </div>
                           </div>
+
+                          {{-- View Orders Modal --}}
+                          <div class="modal fade" id="viewOrder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title text-center" id="exampleModalLabel">View Orders</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <form >
+                                        
+
+
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
 
                 </div>
             </div>

@@ -9,14 +9,15 @@
 </head>
 <body>
     <div class="container">  
-        <form id="contact" action="" method="post">
+        <form id="contact" action="{{route('index.store')}}" method="post">
+            @csrf
             <h3>Welcome To John Shop</h3>
             <h4>Place Your Order By Filling Out The Form Below</h4>
             <fieldset>
-                <input placeholder="Your name" type="text" tabindex="1" required autofocus name="name" id="name">
+                <input placeholder="Your Name" type="text" tabindex="1" required name="name" id="name">
             </fieldset>
             <fieldset>
-                <input placeholder="Your ID Number" type="number" tabindex="2" min="7" max="7" required name="id_num" id="id_num">
+                <input placeholder="Your ID Number" type="number" tabindex="2" min="7" required name="id_num" id="id_num">
             </fieldset>
             <fieldset>
                 <input placeholder="Your Location" type="text" tabindex="3" required name="location" id="location">
@@ -28,11 +29,11 @@
                             <option value="{{$stock->id}}">{{$stock->item_name}}</option> 
                         @endforeach
                     </select>
-                    <input placeholder="Quantity" size="6" type="number" tabindex="3" required style="width:90px">
-                </div> 
+                    <input placeholder="Quantity" size="6" type="number" tabindex="3" required style="width:90px" id="quantity" name="quantity"> 
+                </div>
             </fieldset>
-            <a href="javascript:add_new()">Add More Items</a>
-            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+                <a href="javascript:add_new()">Add More Items</a>
+                <button name="submit" type="submit">Submit</button>
             </fieldset>
         </form>
         </div>

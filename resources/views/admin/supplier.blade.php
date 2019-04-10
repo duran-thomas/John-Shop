@@ -12,7 +12,7 @@
         <div class="card-body">
           <h3 class="card-title">Supplier Table</h3>
           <div class="table">
-              <table class="table col-md">
+              <table class="table col-md" id="laravel_datatable">
                   <thead class="thead-primary">
                     <tr class="table-primary">
                       <th scope="col">ID</th>

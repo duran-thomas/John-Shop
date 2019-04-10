@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Orders;
+use App\Items;
 
 class FrontController extends Controller
 {
@@ -14,7 +16,7 @@ class FrontController extends Controller
      */
     public function index()
     {
-        $stock = DB::table('stock')->get();
+        $stock = DB::table('stock')->where('item_quantity', '!=', 0)->get();
         return view('index', compact('stock'));
     }
 
@@ -37,16 +39,20 @@ class FrontController extends Controller
     public function store(Request $request)
     {
         $orders = new Orders();
-        $orders->item_ID = $request->name;
-        $orders->item_name = $request->id_num;
-        $orders->item_price = $request->location;
-        //$orders->item_quantity = $request->item_quantity;
-       // $orders->supplier_ID = $request->supplier_ID;
-
+        $orders->name = $request->name;
+        $orders->customer_id = $request->id_num;
+        $orders->location = $request->location;
         $orders->save();
 
+        $items = new Items();
+        
+        $items->order_id = $orders->id;
+        $items->item_id = $request->stock_id;
+        $items->quantity = $request->quantity;
+
+        $items->save();
+
         return redirect('index');
-    
     }
 
     /**

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use View;
 use App\Orders;
+use App\Items;
 
 class OrdersController extends Controller
 {
@@ -17,7 +18,9 @@ class OrdersController extends Controller
     public function index()
     {
         $orders = DB::table('orders')->get();
-        return view::make('admin/orders', compact('orders'));
+        //$items_ordered = DB::table('items_ordered')->where('order_id', '=', $orders->id)->first();
+        //dd($items_ordered);
+        return view::make('admin/orders', compact('orders', 'items_ordered'));
     }
 
     /**
