@@ -1,6 +1,6 @@
 ## John-Shop
 
-Built with [Laravel 5.7](https://laravel.com/docs/5.7)
+Application to built to simulate the process of students ordering snacks from a shop and have their snacks delivered to their location. Built with [Laravel 5.7](https://laravel.com/docs/5.7)
 
 ## Dependencies
 
